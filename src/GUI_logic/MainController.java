@@ -1,14 +1,15 @@
 package GUI_logic;
 
 import core.ExistenceChecker;
-import core.FinalVariables;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class MainController {
+import java.io.File;
 
-    ToggleGroup toggleGroup = new ToggleGroup();
+public class MainController {
+    private ToggleGroup toggleGroup = new ToggleGroup();
 
     @FXML
     private RadioButton plus;
@@ -17,16 +18,7 @@ public class MainController {
     private RadioButton enterprise;
 
     @FXML
-    private Label available1;
-
-    @FXML
-    private Label available2;
-
-    @FXML
-    private Label unavailable1;
-
-    @FXML
-    private Label unavailable2;
+    private Label label;
 
     @FXML
     private Button btn;
@@ -36,19 +28,27 @@ public class MainController {
 
     @FXML
     private void click(ActionEvent event) {
+        try {
+            System.out.println(ExistenceChecker.buildPath(ExistenceChecker.getVersion(versionsComboBox),
+                    ExistenceChecker.getBuild(toggleGroup)));
+        } catch(NullPointerException e) {
+            System.out.println("NullError");
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.showAndWait();
     }
 
     @FXML
-    void initialize(){
-        ExistenceChecker ech = new ExistenceChecker(versionsComboBox,
-                available1,
-                available2,
-                unavailable1,
-                unavailable2);
+    private void refreshLabelStatus(ActionEvent event) {
+        System.out.println("Hello");
+        System.out.println(toggleGroup.getSelectedToggle().toString());
+    }
 
+    @FXML
+    void initialize() {
 
+        ExistenceChecker.checkStartSettings();
         plus.setToggleGroup(toggleGroup);
         enterprise.setToggleGroup(toggleGroup);
         plus.setSelected(true);
@@ -60,11 +60,37 @@ public class MainController {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ech.handleVersion(versionsComboBox.getSelectionModel().getSelectedItem().toString());
+                while (true) {
+                    if (!new File(ExistenceChecker.buildPath(ExistenceChecker.getVersion(versionsComboBox),
+                            ExistenceChecker.getBuild(toggleGroup))).exists()) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                label.setText("Selected build is unavailable");
+                                btn.setDisable(true);
+                            }
+                        });
+//
+                    } else {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                label.textProperty().setValue("Selected build is available:\n"
+                                        + "Subversion: 9.5.2\n"
+                                        + "Downloaded: 25.02.18");
+                                if (btn.isDisabled()) {
+                                    btn.setDisable(false);
+                                }
+                            }
+                        });
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }).start();
-
-        System.out.println(versionsComboBox.getSelectionModel().getSelectedItem().toString());
-
     }
 }

@@ -14,16 +14,13 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="525.0">
                      <children>
                         <ComboBox fx:id="versionsComboBox" layoutX="110.0" layoutY="22.0" prefWidth="150.0" />
-                        <RadioButton fx:id="plus" layoutX="29.0" layoutY="77.0" mnemonicParsing="false" text="PLUS" />
-                        <RadioButton fx:id="enterprise" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" text="Enterprise" />
+                        <RadioButton fx:id="plus" layoutX="29.0" layoutY="77.0" mnemonicParsing="false" onAction="#refreshLabelStatus" text="PLUS" />
+                        <RadioButton fx:id="enterprise" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" onAction="#refreshLabelStatus" text="Enterprise" />
                         <Button fx:id="btn" layoutX="177.0" layoutY="193.0" mnemonicParsing="false" onAction="#click" prefHeight="25.0" prefWidth="146.0" text="Install" />
-                        <Label fx:id="unavailable1" layoutX="137.0" layoutY="77.0" text="No build is available" />
-                        <Label fx:id="available2" layoutX="137.0" layoutY="119.0" text="Build is available" />
                         <ProgressBar layoutX="29.0" layoutY="247.0" prefHeight="18.0" prefWidth="442.0" progress="0.0" />
                         <Canvas height="95.0" layoutY="218.0" width="500.0" />
                         <Label layoutX="29.0" layoutY="26.0" text="Build Version:" />
-                        <Label fx:id="unavailable2" layoutX="137.0" layoutY="119.0" text="No build is available" />
-                        <Label fx:id="available1" layoutX="137.0" layoutY="77.0" text="Build is available" />
+                        <Label fx:id="label" layoutX="236.0" layoutY="77.0" text="Label" />
                      </children>
                   </AnchorPane>
             </content>
@@ -42,6 +39,13 @@
               <MenuItem mnemonicParsing="false" text="Credentials" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Navigation">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Open builds folder" />
+                  <MenuItem mnemonicParsing="false" text="Open SmartPTT folder" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exit" />
         </menus>
       </MenuBar>
    </children>
