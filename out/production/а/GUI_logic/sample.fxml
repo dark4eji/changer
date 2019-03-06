@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+
+<Pane fx:controller="GUI_logic.MainController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutY="25.0" prefHeight="327.0" prefWidth="521.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Installation">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="538.0">
+                     <children>
+                        <ComboBox fx:id="versionsComboBox" layoutX="110.0" layoutY="22.0" prefWidth="150.0" />
+                        <RadioButton fx:id="plus" layoutX="29.0" layoutY="77.0" mnemonicParsing="false" text="PLUS" />
+                        <RadioButton fx:id="enterprise" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" text="Enterprise" />
+                        <Button onAction="#click" fx:id="btn" layoutX="177.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0"  text="Install" />
+                        <Label layoutX="137.0" layoutY="77.0" text="No build available" />
+                        <Label layoutX="137.0" layoutY="119.0" text="Build available" />
+                        <ProgressBar layoutX="29.0" layoutY="247.0" prefHeight="18.0" prefWidth="442.0" progress="0.0" />
+                        <Canvas height="95.0" layoutY="218.0" width="500.0" />
+                        <Label layoutX="29.0" layoutY="26.0" text="Build Version:" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Download">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <MenuBar prefHeight="25.0" prefWidth="521.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Credentials" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</Pane>
