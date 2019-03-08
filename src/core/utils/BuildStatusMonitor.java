@@ -22,7 +22,10 @@ public class BuildStatusMonitor {
                            Label label,
                            Button btn) {
 
-        if (!new File(buildPathToBuild(versionsComboBox, toggleGroup)).exists()) {
+        String pathToBuild = buildPathToBuild(versionsComboBox, toggleGroup);
+        VersionParser parser = new VersionParser();
+
+        if (!new File(pathToBuild).exists()) {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -42,7 +45,9 @@ public class BuildStatusMonitor {
                     }
 
                     label.textProperty().setValue("Selected build is available:\n"
-                            + "Subversion: 9.5.2\n"
+                            + "Subversion: " + parser.versionParser(pathToBuild
+                            + "\\server\\RadioService.exe.config")
+                            + "\n"
                             + "Downloaded: " + attr.creationTime());
                     if (btn.isDisabled()) {
                         btn.setDisable(false);
