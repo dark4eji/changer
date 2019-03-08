@@ -15,7 +15,7 @@
                         <ComboBox fx:id="versionsComboBox" layoutX="110.0" layoutY="22.0" prefWidth="150.0" />
                         <RadioButton fx:id="plus" layoutX="29.0" layoutY="77.0" mnemonicParsing="false" text="PLUS" />
                         <RadioButton fx:id="enterprise" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" text="Enterprise" />
-                        <Button fx:id="install" layoutX="177.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Install" />
+                        <Button fx:id="install" onAction="#install" layoutX="177.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Install" />
                         <ProgressBar layoutX="29.0" layoutY="216.0" prefHeight="18.0" prefWidth="454.0" progress="0.0" />
                         <Label layoutX="29.0" layoutY="26.0" text="Build Version:" />
                         <Label fx:id="label" layoutX="236.0" layoutY="77.0" text="Label" />

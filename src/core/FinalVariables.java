@@ -16,5 +16,7 @@ public abstract class FinalVariables {
     public static final Path spttFolderConfig = Paths.get(spttFolder.toString(),
             "RadioService.exe.Config");
 
+    public static final Path temp = Paths.get("C:", "temp");
+
 
 }

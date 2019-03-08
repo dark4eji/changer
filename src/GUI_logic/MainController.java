@@ -1,6 +1,8 @@
 package GUI_logic;
 
+import core.FinalVariables;
 import core.FolderOpener;
+import core.copyengine.Copier;
 import core.utils.ExistenceChecker;
 import core.utils.BuildStatusMonitor;
 import javafx.application.Platform;
@@ -10,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+
+import java.nio.file.Paths;
 
 
 public class MainController {
@@ -42,6 +46,7 @@ public class MainController {
     @FXML
     private void exit(ActionEvent event) {
         Platform.exit();
+        System.exit(0);
     }
 
     @FXML
@@ -64,6 +69,11 @@ public class MainController {
                     "Cannot find SmartPTT folder", ButtonType.OK);
             alert.show();
         }
+    }
+
+    @FXML
+    private void install(ActionEvent event) {
+        new Copier(new BuildStatusMonitor().buildPathToBuild(versionsComboBox, toggleGroup)).start();
     }
 
     @FXML

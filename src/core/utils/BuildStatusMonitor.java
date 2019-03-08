@@ -62,7 +62,7 @@ public class BuildStatusMonitor {
         }
     }
 
-    private String buildPathToBuild(ComboBox<String> setVersion, ToggleGroup setBuild){
+    public String buildPathToBuild(ComboBox<String> setVersion, ToggleGroup setBuild){
         String version = ExistenceChecker.getVersion(setVersion);
         String build = ExistenceChecker.getBuild(setBuild);
         this.path = Paths.get(FinalVariables.buildStorage.toString(), version, build);
