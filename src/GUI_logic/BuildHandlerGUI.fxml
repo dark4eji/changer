@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_logic.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_logic.MainController">
    <children>
-      <TabPane layoutY="25.0" prefHeight="327.0" prefWidth="513.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="25.0" prefHeight="328.0" prefWidth="509.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Installation">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="525.0">
+              <AnchorPane prefHeight="347.0" prefWidth="500.0">
                      <children>
                         <ComboBox fx:id="versionsComboBox" layoutX="110.0" layoutY="22.0" prefWidth="150.0" />
-                        <RadioButton fx:id="plus" layoutX="29.0" layoutY="77.0" mnemonicParsing="false" onAction="#refreshLabelStatus" text="PLUS" />
-                        <RadioButton fx:id="enterprise" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" onAction="#refreshLabelStatus" text="Enterprise" />
-                        <Button fx:id="btn" layoutX="177.0" layoutY="193.0" mnemonicParsing="false" onAction="#click" prefHeight="25.0" prefWidth="146.0" text="Install" />
-                        <ProgressBar layoutX="29.0" layoutY="247.0" prefHeight="18.0" prefWidth="442.0" progress="0.0" />
-                        <Canvas height="95.0" layoutY="218.0" width="500.0" />
+                        <RadioButton fx:id="plus" layoutX="29.0" layoutY="77.0" mnemonicParsing="false" text="PLUS" />
+                        <RadioButton fx:id="enterprise" layoutX="29.0" layoutY="119.0" mnemonicParsing="false" text="Enterprise" />
+                        <Button fx:id="install" layoutX="177.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Install" />
+                        <ProgressBar layoutX="29.0" layoutY="216.0" prefHeight="18.0" prefWidth="454.0" progress="0.0" />
                         <Label layoutX="29.0" layoutY="26.0" text="Build Version:" />
                         <Label fx:id="label" layoutX="236.0" layoutY="77.0" text="Label" />
+                        <Button fx:id="exit" layoutX="411.0" layoutY="260.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="72.0" text="Exit" />
                      </children>
                   </AnchorPane>
             </content>
@@ -32,7 +31,7 @@
           </Tab>
         </tabs>
       </TabPane>
-      <MenuBar prefHeight="25.0" prefWidth="513.0">
+      <MenuBar prefHeight="25.0" prefWidth="509.0">
         <menus>
           <Menu mnemonicParsing="false" text="Settings">
             <items>
@@ -41,11 +40,10 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Navigation">
               <items>
-                <MenuItem mnemonicParsing="false" text="Open builds folder" />
-                  <MenuItem mnemonicParsing="false" text="Open SmartPTT folder" />
+                <MenuItem fx:id="buildsFolder" mnemonicParsing="false" onAction="#openBuildFolder" text="Open builds folder" />
+                  <MenuItem fx:id="spttFolder" mnemonicParsing="false" onAction="#openSpttFolder" text="Open SmartPTT folder" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Exit" />
         </menus>
       </MenuBar>
    </children>

@@ -1,12 +1,16 @@
 package GUI_logic;
 
-import core.ExistenceChecker;
+import core.FolderOpener;
+import core.utils.ExistenceChecker;
+import core.utils.BuildStatusMonitor;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 
-import java.io.File;
 
 public class MainController {
     private ToggleGroup toggleGroup = new ToggleGroup();
@@ -15,34 +19,51 @@ public class MainController {
     private RadioButton plus;
 
     @FXML
+    private Button exit;
+
+    @FXML
+    private Button install;
+
+    @FXML
+    private MenuItem buildsFolder;
+
+    @FXML
+    private MenuItem spttFolder;
+
+    @FXML
     private RadioButton enterprise;
 
     @FXML
     private Label label;
 
     @FXML
-    private Button btn;
-
-    @FXML
     private ComboBox<String> versionsComboBox;
 
     @FXML
-    private void click(ActionEvent event) {
-        try {
-            System.out.println(ExistenceChecker.buildPath(ExistenceChecker.getVersion(versionsComboBox),
-                    ExistenceChecker.getBuild(toggleGroup)));
-        } catch(NullPointerException e) {
-            System.out.println("NullError");
-        }
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.showAndWait();
+    private void exit(ActionEvent event) {
+        Platform.exit();
     }
 
     @FXML
-    private void refreshLabelStatus(ActionEvent event) {
-        System.out.println("Hello");
-        System.out.println(toggleGroup.getSelectedToggle().toString());
+    private void openBuildFolder(ActionEvent event) {
+        try {
+            new FolderOpener().openBuildFolder();
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING,
+                    "Cannot find build folder", ButtonType.OK);
+            alert.show();
+        }
+    }
+
+    @FXML
+    private void openSpttFolder(ActionEvent event) {
+        try {
+            new FolderOpener().openSpttFolder();
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING,
+                    "Cannot find SmartPTT folder", ButtonType.OK);
+            alert.show();
+        }
     }
 
     @FXML
@@ -60,35 +81,12 @@ public class MainController {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                BuildStatusMonitor tc = new BuildStatusMonitor();
                 while (true) {
-                    if (!new File(ExistenceChecker.buildPath(ExistenceChecker.getVersion(versionsComboBox),
-                            ExistenceChecker.getBuild(toggleGroup))).exists()) {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                label.setText("Selected build is unavailable");
-                                btn.setDisable(true);
-                            }
-                        });
-//
-                    } else {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                label.textProperty().setValue("Selected build is available:\n"
-                                        + "Subversion: 9.5.2\n"
-                                        + "Downloaded: 25.02.18");
-                                if (btn.isDisabled()) {
-                                    btn.setDisable(false);
-                                }
-                            }
-                        });
-                    }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    tc.checkState(versionsComboBox,
+                            toggleGroup,
+                            label,
+                            install);
                 }
             }
         }).start();

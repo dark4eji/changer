@@ -12,6 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("BuildHandlerGUI.fxml"));
+
         primaryStage.setTitle("Build Handler");
         primaryStage.setScene(new Scene(root, 500, 350));
         primaryStage.setResizable(false);
