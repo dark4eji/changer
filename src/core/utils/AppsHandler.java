@@ -29,8 +29,20 @@ public class AppsHandler {
             while ((line = input.readLine()) != null) {
                 if (line.contains(config)) {
                     Process killconfig = Runtime.getRuntime().exec(killConfig);
+                    try {
+                        killconfig.waitFor();
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } else if (line.contains(dispatcher)){
                     Process killdisp = Runtime.getRuntime().exec(killDispatcher);
+                    try {
+                        killdisp.waitFor();
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             input.close();

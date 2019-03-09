@@ -1,5 +1,3 @@
-package GUI_logic;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +9,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("BuildHandlerGUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/GUI_logic/fxmlfiles/BuildHandlerGUI.fxml"));
 
         primaryStage.setTitle("Build Handler");
-        primaryStage.setScene(new Scene(root, 500, 350));
+        primaryStage.setScene(new Scene(root, 500, 397));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

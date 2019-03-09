@@ -17,8 +17,10 @@ public class ExistenceChecker {
         String build;
         if (toggleGroup.getSelectedToggle().toString().contains("PLUS")) {
             build = "plus";
-        } else {
+        } else if (toggleGroup.getSelectedToggle().toString().contains("Enterprise")) {
             build = "enterprise";
+        } else {
+            build = "develop";
         }
         return build;
     }

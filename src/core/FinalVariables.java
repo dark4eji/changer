@@ -17,6 +17,7 @@ public abstract class FinalVariables {
             "RadioService.exe.Config");
 
     public static final Path temp = Paths.get("C:", "temp");
+    public static final Path config = Paths.get("C:", "ProgramData", "creds.properties");
 
 
 }

@@ -9,30 +9,6 @@ public class ServiceHandler {
     private String startService = "net start \"SmartPTT Radio Service\"";
     private String stopService = "net stop \"SmartPTT Radio Service\"";
 
-    public void handleService() {
-        try {
-            if (getServiceStatus()) {
-                System.out.println("Stopping Radio Service...");
-                stopService();
-                if (!getServiceStatus()) {
-                    System.out.println("Stopped");
-                } else {
-                    System.out.println("Error while stopping service");
-                }
-            } else {
-                System.out.println("Starting Radio Service...");
-                startService();
-                if (getServiceStatus()) {
-                    System.out.println("Started");
-                } else {
-                    System.out.println("Error while starting service");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean getServiceStatus() {
         boolean status = false;
         try {
@@ -52,7 +28,7 @@ public class ServiceHandler {
         return status;
     }
 
-    private void startService() {
+    public void startService() {
         try {
             Process process = Runtime.getRuntime().exec(startService);
             process.waitFor();
@@ -64,7 +40,7 @@ public class ServiceHandler {
         }
     }
 
-    private void stopService(){
+    public void stopService(){
         try {
             Process process = Runtime.getRuntime().exec(stopService);
             process.waitFor();
